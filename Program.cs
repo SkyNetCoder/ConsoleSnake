@@ -11,7 +11,7 @@ namespace ConsoleSnake
         const int POINTS = 8;
         static void Main(string[] args)
         {
-            Point p1 = new Point(8,3,'~');
+            Point p1 = new Point(8,3,'*');
             p1.Draw();
 
             Point p2 = new Point(5,5, '#');
@@ -48,20 +48,11 @@ namespace ConsoleSnake
                 if(Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
-                    if (key.Key == ConsoleKey.LeftArrow)
-                        snake.direction = Direction.LEFT;
-                    if (key.Key == ConsoleKey.RightArrow)
-                        snake.direction = Direction.RIGHT;
-                    if (key.Key == ConsoleKey.UpArrow)
-                        snake.direction = Direction.UP;
-                    if (key.Key == ConsoleKey.DownArrow)
-                        snake.direction = Direction.DOWN;
+                    snake.KeyHandler(key.Key);
                 }
                 Thread.Sleep(200);
                 snake.Move();
             }
-            
-            Console.SetCursorPosition(0, 24);
         }
 
         public static void Move(Point p, int dx, int dy)

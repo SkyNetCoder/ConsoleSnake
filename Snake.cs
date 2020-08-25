@@ -7,7 +7,7 @@ namespace ConsoleSnake
 {
     class Snake : Line
     {
-        public Direction direction;
+        Direction direction;
         public Snake (Point tail, int lenght, Direction _direction)
         {
             direction = _direction;
@@ -38,6 +38,18 @@ namespace ConsoleSnake
             Point nextPoint = new Point(head);
             nextPoint.Move(1, direction);
             return nextPoint;
+        }
+
+        public void KeyHandler(ConsoleKey key)
+        {
+            if (key == ConsoleKey.LeftArrow)
+                direction = Direction.LEFT;
+            if (key == ConsoleKey.RightArrow)
+                direction = Direction.RIGHT;
+            if (key == ConsoleKey.UpArrow)
+                direction = Direction.UP;
+            if (key == ConsoleKey.DownArrow)
+                direction = Direction.DOWN;
         }
     }
 }
