@@ -13,11 +13,8 @@ namespace ConsoleSnake
         {
             Console.CursorVisible = false;
 
-            Point p1 = new Point(8,3, '■');
-            p1.Draw();
-
-            Point p2 = new Point(5,5, '#');
-            p2.Draw();
+            Point p = new Point(8,3, '■');
+            p.Draw();
 
             //Отрисовка рамки
             HorizontalLine upLine = new HorizontalLine(1, 0, 80, '-');
@@ -42,7 +39,7 @@ namespace ConsoleSnake
             VerticalLine vLine = new VerticalLine(3, 3, 6, 'o');
             vLine.Draw();
 
-            Snake snake = new Snake(p1, 5, Direction.RIGHT);
+            Snake snake = new Snake(p, 5, Direction.RIGHT);
             snake.Draw();
 
             FoodCreator foodCreator = new FoodCreator(80, 24);
