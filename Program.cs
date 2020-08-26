@@ -11,7 +11,9 @@ namespace ConsoleSnake
         const int POINTS = 8;
         static void Main(string[] args)
         {
-            Point p1 = new Point(8,3,'*');
+            Console.CursorVisible = false;
+
+            Point p1 = new Point(8,3, '■');
             p1.Draw();
 
             Point p2 = new Point(5,5, '#');
@@ -42,24 +44,31 @@ namespace ConsoleSnake
 
             Snake snake = new Snake(p1, 5, Direction.RIGHT);
             snake.Draw();
-            
+
+            FoodCreator foodCreator = new FoodCreator(80, 24);
+            Point food = foodCreator.CreateFood();
+            food.Draw();
+
             while (true)
             {
+                if (snake.Eat(food))
+                {
+                    food = foodCreator.CreateFood();
+                    food.Draw();
+                }
+                else
+                {
+                    snake.Move();
+                }
+
+                Thread.Sleep(200);
+                
                 if(Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.KeyHandler(key.Key);
                 }
-                Thread.Sleep(200);
-                snake.Move();
             }
         }
-
-        public static void Move(Point p, int dx, int dy)
-        {
-            p.x += dx;
-            p.y += dy;
-        }
-
     }
 }
