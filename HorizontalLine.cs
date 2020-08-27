@@ -14,7 +14,13 @@ namespace ConsoleSnake
                 Point p = new Point(x, yPos, sym);
                 pList.Add(p);
             }
+        }
 
+        public override void Draw()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            base.Draw();
+            Console.ResetColor();
         }
     }
 }

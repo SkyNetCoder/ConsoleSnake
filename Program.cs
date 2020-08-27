@@ -11,33 +11,15 @@ namespace ConsoleSnake
         const int POINTS = 8;
         static void Main(string[] args)
         {
+            Console.Title = "Console Snake";
+            
             Console.CursorVisible = false;
+
+            Room gameRoom = new Room(80, 24);
+            gameRoom.Draw();
 
             Point p = new Point(8,3, '■');
             p.Draw();
-
-            //Отрисовка рамки
-            HorizontalLine upLine = new HorizontalLine(1, 0, 80, '-');
-            upLine.Draw();
-            HorizontalLine downLine = new HorizontalLine(1, 24, 80, '-');
-            downLine.Draw();
-            VerticalLine leftLine = new VerticalLine(0, 1, 23, '|');
-            leftLine.Draw();
-            VerticalLine rightLine = new VerticalLine(81, 1, 23, '|');
-            rightLine.Draw();
-
-            //Отрисовка углов
-            Point leftTop = new Point(0, 0, '+');
-            leftTop.Draw();
-            Point leftBot = new Point(0, 24, '+');
-            leftBot.Draw();
-            Point rightTop = new Point(81, 0, '+');
-            rightTop.Draw();
-            Point rightBot = new Point(81, 24, '+');
-            rightBot.Draw();
-
-            VerticalLine vLine = new VerticalLine(3, 3, 6, 'o');
-            vLine.Draw();
 
             Snake snake = new Snake(p, 5, Direction.RIGHT);
             snake.Draw();
@@ -48,6 +30,12 @@ namespace ConsoleSnake
 
             while (true)
             {
+                if (gameRoom.IsHit(snake) || snake.IsHitTail())
+                {
+                    Console.Write("Game Over!");
+                    Thread.Sleep(1000);
+                    break;
+                }
                 if (snake.Eat(food))
                 {
                     food = foodCreator.CreateFood();
